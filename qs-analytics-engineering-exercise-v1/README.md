@@ -9,7 +9,6 @@
 The client is the owner of a high-end chain of bars. Recently they've experienced complaints about the time it's taken staff to deliver their drinks after they've been ordered.
 
 An initial analysis by the team has shown that this issue is primarily driven by the lack of available glasses for the drinks being ordered. The owners want to take a data driven approach to business decisions in future but they currently have no historical data. They have asked staff to start recording data and we have been provided with an inventory across all three bars as well as the last week of transaction data.
-
 They use the online cocktails database (`https://www.thecocktaildb.com/api.php`) for their menu and all bars serve a subset of these drinks according to the instructions in the database.
 
 The bars are 24hour and for simplicity you can assume they are equally busy around the clock.
@@ -31,3 +30,10 @@ Finally please structure the project so that any analysts hired by the bar could
     - Runs the poc_tables SQL script
 - A .sqlite database
 - A repository which is in good condition for analysts to take over your work.
+
+### Next Steps:
+* Clean the data further so that the data sitting in the existing tables is cleaner. examples of this are: `GlassID` in the glass table instead of `Glass`, and Language in the instuctions table.
+* Create an `AvailableStock` table, similar to the `Stock` table but with clean glasses only. `Stock` table holds the maximum number of glasses available per bar, it was inteded for update when the total number of glasses change.
+* Create a function that updates the available stock table as transactions are ordered, If there are no glasses available, reject the transaction and insert the rejected transactions in a `FailedTransaction` table. views can be built off that table to infer which glasses should be bought and in what quantities.
+
+final note: this is such an interesting project and a very large number of factors could be considered, like the average amount of time each glass is kept by each customer and the cleaning/restocking speed after that. anyways will stop here now. 
